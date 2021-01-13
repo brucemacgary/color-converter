@@ -1,0 +1,167 @@
+<html>
+<head>
+	<title>RGB Int Calculator</title>
+	<SCRIPT TYPE="text/javascript">
+<!--
+function getkey(e)
+{
+if (window.event)
+   return window.event.keyCode;
+else if (e)
+   return e.which;
+else
+   return null;
+}
+//-->
+</SCRIPT>
+<SCRIPT TYPE="text/javascript">
+<!--
+function goodchars(e, goods)
+{
+var key, keychar;
+key = getkey(e);
+if (key == null) return true;
+
+// get character
+keychar = String.fromCharCode(key);
+keychar = keychar.toLowerCase();
+goods = goods.toLowerCase();
+
+// check goodkeys
+if (goods.indexOf(keychar) != -1)
+	return key;
+	
+//do not accept returns.	
+if (key==13) return false;
+
+// control keys
+if ( key==null || key==0 || key==8 || key==9 ||  key==27 )
+   return key;
+
+// else return false
+return false;
+}
+//-->
+</SCRIPT>
+	
+</head>
+<script language="JavaScript">
+window.name="gcwindow"
+</script>
+
+<body bgcolor="white"color="#FFFFFF" link="#663300" alink="#CC0000" vlink="#CC0000">
+<CENTER>
+<H3>Calculate RGB Int</H3>
+</center>
+
+<P>Color in different programming languages is usually represented by a red, green and blue component. The final color is a combination of the three primary colors of light. Typically, values are used ranging from 0 to 255 for each of the components, however, some systems will want you to enter a hexadecimal number in the form RRGGBB where RR is the red value expressed as hexadecimal, GG is the green value, and BB is the blue value. Other systems, such as Java, will want an integer where bits 0-7 are the red value, 8-15 the green, and 16-23 the blue.
+
+<P>This page will let you enter in RGB values, and by pressing evaluate, see the correspinding hexadecimal and integer representations of the color. The background of the page will change to the color selected.
+
+<center>
+<form>
+<H3>Input Value(s):</H3>
+<TABLE BORDER CELLPADDING=2>
+<TR>
+<TD>
+Red =</TD>
+<TD>
+<INPUT TYPE="TEXT" name="red" value="255" onKeyPress="return goodchars(event,'0123456789+-e.')" size=25>
+(0-255)</TD>
+</TR>
+<TR>
+<TD>
+Green = </TD>
+<TD>
+<INPUT TYPE="text" NAME="green" value = "255" SIZE=25 onKeyPress="return goodchars(event,'0123456789+-e.')">
+(0-255)</TD>
+</TR>
+<TR>
+<TD>
+Blue = </TD>
+<TD>
+<INPUT TYPE="text" NAME="blue" value ="255" SIZE=25 onKeyPress="return goodchars(event,'0123456789+-e.')">
+(0-255)</TD>
+</TR>
+</table><H3>Result(s):</H3>
+<TABLE BORDER CELLPADDING=2>
+<TR>
+<TD>
+RGB int = </TD>
+<TD>
+<INPUT TYPE="text" NAME="rgbint" SIZE=25 onKeyPress="return false">
+</TD></TR>
+<TR>
+<TD>
+RGB hex = </TD>
+<TD>
+<INPUT TYPE="text" NAME="rgbhex" SIZE=25 onKeyPress="return false">
+</TD></TR>
+</table><TABLE BORDER CELLPADDING=2>
+<P>
+<TABLE BORDER=5 CELLPADDING=2>
+<TD><INPUT TYPE="reset" NAME="res" VALUE="Reset Values"></TD>
+<TD><INPUT TYPE="button" NAME="eval" VALUE="Evaluate" 
+onClick="
+{
+var red=parseInt(this.form.red.value)
+var green=parseInt(this.form.green.value)
+var blue=parseInt(this.form.blue.value)
+this.form.rgbint.value=256*256*red+256*green+blue
+this.form.rgbhex.value=tohex(red)+tohex(green)+tohex(blue)
+document.bgColor=tohex(red)+tohex(green)+tohex(blue)
+
+function tohex (n) {
+   var retval='';
+   if (n<=0) {
+      retval='00';
+      return retval;
+   }
+   var nt=n;
+   while (n>0) {
+      var m=n;
+      n=m>>4;
+      m=m%16;
+      var string='';
+      if (m<10) string=''+m; else {
+         switch (m) {
+            case 10:
+            default:
+               string='A'
+            break;
+            
+            case 11:
+               string='B'
+            break;
+            
+            case 12:
+               string='C'
+            break;
+            
+            case 13:
+               string='D'
+            break;
+            
+            case 14:
+               string='E'
+            break;
+            
+            case 15:
+               string='F'
+            break;
+         }
+      }
+      retval=string+retval;
+   }
+   if (nt<16) retval='0'+retval;
+   return retval;
+}
+}"> </TD></TABLE><P>
+</form>
+</CENTER><br>
+<div align="center">
+<font face="Arial,Helvetica" size="2"><a href="gravcalcinfo.html" target="gcwindow">Information</a> about Calculator</font><br>
+</div>
+
+</body>
+</html>
